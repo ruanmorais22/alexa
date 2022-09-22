@@ -1,0 +1,207 @@
+[
+    {
+        "id": "4e7cf238af1f5df8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6e4846905453748f",
+        "type": "inject",
+        "z": "4e7cf238af1f5df8",
+        "name": "Rele 0",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "81a3ce42ee8fdde5"
+            ]
+        ]
+    },
+    {
+        "id": "81a3ce42ee8fdde5",
+        "type": "http request",
+        "z": "4e7cf238af1f5df8",
+        "name": "status atual",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://ny3.blynk.cloud/external/api/get?token=tlstSsESOdDGEWovDgpolPOrc3Vj-oOI&V0",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "046112187c10345c"
+            ]
+        ]
+    },
+    {
+        "id": "046112187c10345c",
+        "type": "switch",
+        "z": "4e7cf238af1f5df8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "2d44d0ac385d51ee"
+            ],
+            [
+                "ea62a6e4e9af997b"
+            ]
+        ]
+    },
+    {
+        "id": "d2f3dc34c394d3dc",
+        "type": "debug",
+        "z": "4e7cf238af1f5df8",
+        "name": "ligar",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "439db4727373427c",
+        "type": "debug",
+        "z": "4e7cf238af1f5df8",
+        "name": "desligar",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2d44d0ac385d51ee",
+        "type": "http request",
+        "z": "4e7cf238af1f5df8",
+        "name": "acende",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://ny3.blynk.cloud/external/api/update?token=tlstSsESOdDGEWovDgpolPOrc3Vj-oOI&V0=1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 660,
+        "y": 60,
+        "wires": [
+            [
+                "d2f3dc34c394d3dc",
+                "8bd41e6005007d32"
+            ]
+        ]
+    },
+    {
+        "id": "ea62a6e4e9af997b",
+        "type": "http request",
+        "z": "4e7cf238af1f5df8",
+        "name": "apaga",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://ny3.blynk.cloud/external/api/update?token=tlstSsESOdDGEWovDgpolPOrc3Vj-oOI&V0=0",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 160,
+        "wires": [
+            [
+                "439db4727373427c",
+                "8bd41e6005007d32"
+            ]
+        ]
+    },
+    {
+        "id": "ee99c5078b217326",
+        "type": "alexa-home",
+        "z": "4e7cf238af1f5df8",
+        "conf": "c56da299533f6ed8",
+        "device": "183352",
+        "acknoledge": false,
+        "name": "alexa relays blynk",
+        "topic": "",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "81a3ce42ee8fdde5"
+            ]
+        ]
+    },
+    {
+        "id": "8bd41e6005007d32",
+        "type": "alexa-home-resp",
+        "z": "4e7cf238af1f5df8",
+        "x": 1060,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c56da299533f6ed8",
+        "type": "alexa-home-conf",
+        "username": "Ruanmorais",
+        "credentials": {}
+    }
+]
